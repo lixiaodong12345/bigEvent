@@ -36,47 +36,32 @@
   <script src="./js/jquery-1.12.4.min.js"></script>
   <script src="./tool/config.js"></script>
   <script>
-    /*
-      结构的修改：
-        如果静态页面不是我们自己制作的，我们需要考虑结构对功能的影响
-          - 我们希望使用ajax进行提交操作，需要将submit按钮更改为普通按钮
-            - 进行结构修改时，推荐将原始结构保存为注释，再重新书写结构
-          - 方式2：阻止标签的默认行为
-    */
-
-    // 功能实现：
-    // 1 给登录按钮设置点击事件
-    $('.input_sub').on('click', function () {
-      // 2 检测内容是否存在，如果不存在，阻止请求发送
-      var txt = $('.input_txt').val();
-      var pass = $('.input_pass').val();
-
-      // 可以通过字符串方法进行空格去除
-      if (txt.trim() === '' || pass.trim() === '') {
-        alert('请完整输入用户名和密码!~');
-        return;
-      }
-
-      // 3 发送请求
-      $.ajax({
-        type: 'post',
-        url: USER_LOGIN, // url地址是从config.js中获取的，要学会习惯
-        data: {
-          user_name: txt,
-          password: pass
-        },
-        success: function (res) {
-          // 4 根据服务端响应的状态进行对应操作
-          if (res.code === 200) {
-            // 跳转到首页
-            location.href = './index.html';
-          } else {
-            // 进行错误提示
-            alert('用户名或密码错误');
-          }
+      // 修改页面
+      // 获取要操作的元素
+      $('.input_sub').on('click',function(){
+        if($('.input_txt').val().trim() == '' || $('.input_pass').val().trim() == ''){
+          alert('请输入完整内容')
+          return;
         }
+        $.ajax({
+          url:USER_LOGIN,
+          type:'post',
+          data:{
+            user_name:$('.input_txt').val(),
+            password:$('.input_pass').val()
+          },
+          success:function(res){
+            if(res.code == 200){
+              location.href = './index.html'
+            }else{
+              alert(res.msg);
+            }
+            
+          }
+
+        })
       })
-    });
+
 
 
 
