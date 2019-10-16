@@ -1,1 +1,7 @@
-{"username":"littlebaby","nickname":"小可爱","email":"heima@itcast.cn","user_pic":"/static/f6c41f0ec57933d4bf90b770ee8d685d","password":"123456"}
+{
+  "username": "littlebaby",
+  "nickname": "小可爱",
+  "email": "heima@itcast.cn",
+  "user_pic": "/static/icon.gif",
+  "password": "123456"
+}
